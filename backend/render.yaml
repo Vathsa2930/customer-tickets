@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: support-backend
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn support_project.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: support_project.settings
+      - key: DATABASE_URL
+        fromDatabase:
+          name: support-db
+          property: connectionString
